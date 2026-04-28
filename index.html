@@ -8,7 +8,6 @@
 <style>
 body{
     margin:0;
-    overflow:auto;
     font-family:'Segoe UI',cursive;
     background:radial-gradient(circle,#1a1a1a,#000);
     color:#eee;
@@ -49,6 +48,10 @@ body{
     transition:2s;
     text-align:center;
     padding:20px;
+
+    max-height:80vh;
+    overflow-y:auto;
+    scroll-behavior:smooth;
 }
 .show{opacity:1;}
 
@@ -63,6 +66,26 @@ h1{
     100%{opacity:.6;}
 }
 
+/* FADE CINEMATIC */
+.container::before,
+.container::after{
+    content:"";
+    position:sticky;
+    left:0;
+    width:100%;
+    height:40px;
+    pointer-events:none;
+    z-index:5;
+}
+.container::before{
+    top:0;
+    background:linear-gradient(to bottom,#000,transparent);
+}
+.container::after{
+    bottom:0;
+    background:linear-gradient(to top,#000,transparent);
+}
+
 /* FOTO HATI */
 .photo-single{
     display:flex;
@@ -74,30 +97,22 @@ h1{
     height:180px;
     object-fit:cover;
     clip-path:path("M100 180 C 20 120, 0 60, 50 30 C 80 10, 100 40, 100 40 C 100 40, 120 10, 150 30 C 200 60, 180 120, 100 180 Z");
-    
     filter:grayscale(100%);
-    animation:float 5s infinite ease-in-out, heartbeat 10s infinite;
+    animation:float 5s infinite ease-in-out, heartbeat 6s infinite;
     transition:5s;
 }
+.color{filter:grayscale(0%);}
 
-/* berubah warna */
-.color{
-    filter:grayscale(0%);
-}
-
-/* FLOAT */
 @keyframes float{
     0%{transform:translateY(0);}
     50%{transform:translateY(-10px);}
     100%{transform:translateY(0);}
 }
-
-/* HEARTBEAT */
 @keyframes heartbeat{
     0%{transform:scale(1);}
-    25%{transform:scale(1.05);}
-    40%{transform:scale(0.95);}
-    60%{transform:scale(1.1);}
+    25%{transform:scale(1.04);}
+    40%{transform:scale(0.98);}
+    60%{transform:scale(1.06);}
     100%{transform:scale(1);}
 }
 
@@ -178,11 +193,26 @@ function openLetter(){
     document.getElementById("content").classList.add("show");
     playMusic();
     typing();
+    autoScroll();
 
-    // ubah foto jadi berwarna setelah 3 detik
     setTimeout(()=>{
         document.getElementById("photo").classList.add("color");
     },3000);
+}
+
+// AUTO SCROLL CINEMATIC
+function autoScroll(){
+    const el = document.getElementById("content");
+    let speed = 0.3; // ubah di sini kalau mau lebih pelan/cepat
+
+    function scrollStep(){
+        if(el.scrollTop + el.clientHeight < el.scrollHeight){
+            el.scrollTop += speed;
+            requestAnimationFrame(scrollStep);
+        }
+    }
+
+    setTimeout(scrollStep, 3000);
 }
 
 // TEXT (TIDAK DIUBAH)
@@ -239,7 +269,7 @@ setInterval(()=>{
     setTimeout(()=>r.remove(),1000);
 },60);
 
-// KELopak bunga
+// PETAL
 setInterval(()=>{
     let p=document.createElement("div");
     p.className="petal";
