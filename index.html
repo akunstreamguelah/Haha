@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huaaaaaaaa♡</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:'Segoe UI',cursive;
+    background:radial-gradient(circle,#1a1a1a,#000);
+    color:#eee;
+}
+
+/* ENVELOPE */
+.envelope{
+    position:absolute;
+    width:300px;
+    height:200px;
+    background:#111;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 0 30px rgba(0,0,0,0.8);
+}
+.envelope:before{
+    content:"💔 klik perlahan...";
+    color:#aaa;
+}
+
+/* OPEN */
+.open{
+    animation:openEnv 1.5s forwards;
+}
+@keyframes openEnv{
+    to{transform:translate(-50%,-250%) scale(0);opacity:0;}
+}
+
+/* CONTENT */
+.container{
+    opacity:0;
+    transition:2s;
+    text-align:center;
+    padding:20px;
+}
+.show{opacity:1;}
+
+h1{
+    font-weight:300;
+    letter-spacing:2px;
+    animation:fadeText 3s infinite;
+}
+@keyframes fadeText{
+    0%{opacity:.6;}
+    50%{opacity:1;}
+    100%{opacity:.6;}
+}
+
+/* FOTO HATI */
+.photo-single{
+    display:flex;
+    justify-content:center;
+    margin:25px;
+}
+.photo-single img{
+    width:200px;
+    height:180px;
+    object-fit:cover;
+    clip-path:path("M100 180 C 20 120, 0 60, 50 30 C 80 10, 100 40, 100 40 C 100 40, 120 10, 150 30 C 200 60, 180 120, 100 180 Z");
+    
+    filter:grayscale(100%);
+    animation:float 5s infinite ease-in-out, heartbeat 10s infinite;
+    transition:5s;
+}
+
+/* berubah warna */
+.color{
+    filter:grayscale(0%);
+}
+
+/* FLOAT */
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* HEARTBEAT */
+@keyframes heartbeat{
+    0%{transform:scale(1);}
+    25%{transform:scale(1.05);}
+    40%{transform:scale(0.95);}
+    60%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+/* TEXT */
+p{
+    font-size:18px;
+    line-height:1.9;
+    white-space:pre-line;
+}
+
+/* HUJAN */
+.rain{
+    position:absolute;
+    width:2px;
+    height:80px;
+    background:rgba(255,255,255,0.15);
+    animation:rainFall linear infinite;
+}
+@keyframes rainFall{
+    to{transform:translateY(110vh);}
+}
+
+/* PETAL */
+.petal{
+    position:absolute;
+    color:#ff6b81;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
+}
+
+/* BUTTON */
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#ff4e8a;
+    border:none;
+    padding:10px 15px;
+    border-radius:20px;
+    color:white;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+<source src="https://cdn.pixabay.com/download/audio/2021/11/25/audio_91b6b7f6e3.mp3">
+</audio>
+
+<button class="music-btn" onclick="playMusic()">🎶</button>
+
+<div class="envelope" onclick="openLetter()"></div>
+
+<div class="container" id="content">
+<h1>Hi Honeyy♡</h1>
+
+<div class="photo-single">
+    <img id="photo" src="foto1.jpg">
+</div>
+
+<p id="text"></p>
+
+<p>Pikachuku♡</p>
+</div>
+
+<script>
+function playMusic(){
+    document.getElementById("bgm").play();
+}
+
+function openLetter(){
+    document.querySelector(".envelope").classList.add("open");
+    document.getElementById("content").classList.add("show");
+    playMusic();
+    typing();
+
+    // ubah foto jadi berwarna setelah 3 detik
+    setTimeout(()=>{
+        document.getElementById("photo").classList.add("color");
+    },3000);
+}
+
+// TEXT (TIDAK DIUBAH)
+const text=`Sayaaaaaaaaaaaaaaaang..
+Rinduuuuuuuuuuuuuuuuuuuuuu HAHA
+Rindu ini aneh yaa
+datang tanpa permisi, tapi selalu tahu ke mana harus pulang
+Kamuuuuuuuu HAHAHAAA♡♡
+
+Kita memang hanya dipertemukan beberapa kali,  
+namun ntah kenapa disetiap hariku pasti memikirkanmuu
+
+Ada sesuatu tentang kamu yang sulit dijelaskan,  
+seolah semesta sengaja mempertemukan kita  
+bukan untuk waktu yang lama,  
+tapi untuk rasa yang begitu tidak aku sangka sangka.
+
+Aku rindu senyummu,  
+rindu perhatian kamu dengan caramu,  
+dan rindu perasaan hangat  
+yang hanya bisa aku dapatkan disaat bertemu kamu.
+
+Sri Wardani sayangkuu,  
+Sabar yaaaaa,  
+mungkin belum waktu yang pas untuk kita bertemuuu
+Tapi yakinlah
+Disaat itu tiba,, aku pasti menunjukan kepada mahkluk disekitamu
+Betapa bershukurnya aku
+Bertemu
+Dan Memilikimuuuuu ⸜(｡˃ ᵕ ˂ )⸝
+
+
+Sayanggkuu
+Missyouu
+ I love you banyak banyakkk♡♡♡♡♡♡.`;
+
+// TYPING
+let i=0;
+function typing(){
+    if(i<text.length){
+        document.getElementById("text").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typing,70);
+    }
+}
+
+// HUJAN
+setInterval(()=>{
+    let r=document.createElement("div");
+    r.className="rain";
+    r.style.left=Math.random()*100+"vw";
+    r.style.animationDuration=(0.5+Math.random()*0.5)+"s";
+    document.body.appendChild(r);
+    setTimeout(()=>r.remove(),1000);
+},60);
+
+// KELopak bunga
+setInterval(()=>{
+    let p=document.createElement("div");
+    p.className="petal";
+    p.innerHTML="🌸";
+    p.style.left=Math.random()*100+"vw";
+    p.style.fontSize=(10+Math.random()*20)+"px";
+    p.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),6000);
+},400);
+</script>
+
+</body>
+</html>
